@@ -1,0 +1,5 @@
+-   id: check-commit-message
+    name: check-commit-message
+    entry: ./check_commit_message.sh
+    stages: [commit-msg]
+    language: script
