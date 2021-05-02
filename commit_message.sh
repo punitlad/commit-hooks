@@ -1,9 +1,17 @@
 #!/bin/bash
 
-if [ "$#" -ne 2 ]; then
-  echo "check_commit_message requires a two arguments stating type and regular expression"
-  echo "possible types: check"
+display_help() {
+  echo "Usage: commit_message {check|prepend} matcher or message"
+  echo
+  echo "   check           validates whether the commit message contains the input expected matcher"
+  echo "   prepend         prepends commit message with input message"
+  echo
   exit 1
+}
+
+if [ "$#" -ne 2 ]; then
+  echo "Error. Expected 2 arguments"
+  display_help
 fi
 
 if [ "$1" == "check" ]; then
@@ -19,7 +27,6 @@ elif [ "$1" == "prepend" ]; then
   echo $MESSAGE > .git/COMMIT_EDITMSG
   echo "Message updated to: $(cat .git/COMMIT_EDITMSG)"
 else 
-  echo "check_commit_message requires a two arguments stating type and regular expression"
-  echo "possible types: check"
-  exit 1
+  echo "Error. Invalid type $1"
+  display_help
 fi
