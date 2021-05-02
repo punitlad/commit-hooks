@@ -1,6 +1,6 @@
 -   id: check-commit-message
     name: check-commit-message
-    entry: ./check_commit_message.sh
+    entry: ./check_commit_message.sh check
     stages: [commit-msg]
     language: script
     pass_filenames: false
