@@ -1,12 +1,12 @@
 -   id: check-commit-message
     name: check-commit-message
     entry: ./commit_message.sh check
-    stages: [commit-msg]
+    stages: [commit, prepare-commit-msg, commit-msg]
     language: script
     pass_filenames: false
 -   id: prepend-commit-message
     name: prepend-commit-message
     entry: ./commit_message.sh prepend
-    stages: [prepare-commit-msg]
+    stages: [commit, prepare-commit-msg, commit-msg]
     language: script
     pass_filenames: false
