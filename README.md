@@ -15,6 +15,7 @@ Validates whether your commit message contains the specified pattern match (pass
     hooks:
       - id: check-commit-message
         args: [TASK-[0-9]{4,}]
+        stage: [commit-msg]
 ```
 
 ### `prepend-commit-message`
@@ -27,5 +28,6 @@ Prepends your commit message with specified message (passed via args).
     rev: v1.1.0
     hooks:
       - id: prepend-commit-message
-        args: [TASK-12345 - ]
+        args: ['TASK-12345 - ']
+        stage: [prepend-commit-msg]
 ```
