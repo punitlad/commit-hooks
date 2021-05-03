@@ -3,8 +3,10 @@
     entry: ./commit_message.sh check
     language: script
     pass_filenames: false
+    stages: [commit-msg]
 -   id: prepend-commit-message
     name: prepend-commit-message
     entry: ./commit_message.sh prepend
     language: script
     pass_filenames: false
+    stages: [prepare-commit-msg]
