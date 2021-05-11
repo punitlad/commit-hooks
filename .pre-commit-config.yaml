@@ -1,0 +1,10 @@
+repos:
+    - repo: https://github.com/thoughtworks/talisman
+      rev: v1.11.0
+      hooks:
+        - id: talisman-commit
+    - repo: https://github.com/punitlad/commit-hooks.git
+      rev: v1.3.0
+      hooks:
+        - id: verify-commit-signature
+          stages: ["push"]
