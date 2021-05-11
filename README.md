@@ -11,7 +11,7 @@ Validates whether your commit message contains the specified pattern match (pass
 **Example Usage**
 ```yaml
   - repo: https://github.com/punitlad/commit-hooks
-    rev: v1.1.0
+    rev: v1.3.0
     hooks:
       - id: check-commit-message
         args: [TASK-[0-9]{4,}]
@@ -25,9 +25,22 @@ Prepends your commit message with specified message (passed via args).
 **Example Usage**
 ```yaml
   - repo: https://github.com/punitlad/commit-hooks
-    rev: v1.1.0
+    rev: v1.3.0
     hooks:
       - id: prepend-commit-message
         args: ['TASK-12345 - ']
         stage: [prepend-commit-msg]
+```
+
+### `verify-commit-signature`
+
+Verifies signature on all unpushed commits
+
+**Example Usage**
+```yaml
+  - repo: https://github.com/punitlad/commit-hooks
+    rev: v1.3.0
+    hooks:
+      - id: verify-commit-signature
+        stage: [push]
 ```
