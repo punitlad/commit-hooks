@@ -33,9 +33,17 @@ elif [ "$1" == "prepend" ]; then
   echo $MESSAGE > .git/COMMIT_EDITMSG
   echo "Message updated to: $(cat .git/COMMIT_EDITMSG)"
 elif [ "$1" == "verify" ]; then
-  git verify-commit HEAD
-  if [ $? -eq 1 ]; then
-    echo "Could not verify signature on commit. All commits must be signed."
+  HASHES=$(git log origin/main..HEAD --format=format:%h)
+  UNVERIFIED=""
+  for i in $HASHES; do
+    git verify-commit $i &> /dev/null
+    if [ $? -eq 1 ]; then
+      UNVERIFIED="$UNVERIFIED $i"
+    fi
+  done
+
+  if [[ $UNVERIFIED != "" ]]; then
+    echo "Failed verifing signature on commits:$UNVERIFIED. All commits must be signed. "
     exit 1
   fi
 else 
