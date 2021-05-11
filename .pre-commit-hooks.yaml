@@ -10,3 +10,10 @@
     language: script
     pass_filenames: false
     stages: [prepare-commit-msg]
+-   id: verify-commit-signature
+    name: verify-commit-signature
+    entry: ./commit_message.sh verify
+    language: script
+    always_run: true
+    pass_filenames: false
+    stages: [post-commit, push]
