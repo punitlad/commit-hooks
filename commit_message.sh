@@ -10,19 +10,23 @@ display_help() {
   exit 1
 }
 
-if [ "$1" == "check" ]; then
-  if [ "$#" -ne 2 ]; then
-    echo "Error. Expected 2 arguments"
+check() {
+  if [ "$#" -ne 1 ]; then
+    echo "Error. Matcher not set"
     display_help
   fi
 
-  MATCHER=$2 # incoming argument value from pre-commit
+  MATCHER=$1 # incoming argument value from pre-commit
 
   MSG=$(cat .git/COMMIT_EDITMSG)
   if ! echo $MSG | grep -E $MATCHER ;then
       echo "Your commit message must contain the matcher $MATCHER"
       exit 1
   fi
+}
+
+if [ "$1" == "check" ]; then
+  check $2
 elif [ "$1" == "prepend" ]; then
   if [ "$#" -ne 2 ]; then
     echo "Error. Expected 2 arguments"
