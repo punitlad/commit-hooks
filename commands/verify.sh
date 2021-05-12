@@ -1,5 +1,12 @@
 #!/bin/bash
 
+help() {
+  echo "usage: commit_message verify"
+  echo 
+  echo "Verifies commits are signed with the correct author. Checks between origin/main and HEAD"
+  exit 1
+}
+
 verify() {
   HASHES=$(git log origin/main..HEAD --format='format:%h;%ae')
   UNSIGNED=""
