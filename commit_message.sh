@@ -10,21 +10,6 @@ display_help() {
   exit 1
 }
 
-check() {
-  if [ "$#" -ne 1 ]; then
-    echo "Error. Matcher not set"
-    display_help
-  fi
-
-  MATCHER=$1 # incoming argument value from pre-commit
-
-  MSG=$(cat .git/COMMIT_EDITMSG)
-  if ! echo $MSG | grep -E $MATCHER ;then
-      echo "Your commit message must contain the matcher $MATCHER"
-      exit 1
-  fi
-}
-
 prepend() {
   if [ "$#" -ne 1 ]; then
     echo "Error. Prepend value not set"
@@ -66,7 +51,7 @@ verify() {
 }
 
 if [ "$1" == "check" ]; then
-  check $2
+  ./commands/check.sh $2
 elif [ "$1" == "prepend" ]; then
   prepend $2
 elif [ "$1" == "verify" ]; then
