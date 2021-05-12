@@ -33,19 +33,32 @@ elif [ "$1" == "prepend" ]; then
   echo $MESSAGE > .git/COMMIT_EDITMSG
   echo "Message updated to: $(cat .git/COMMIT_EDITMSG)"
 elif [ "$1" == "verify" ]; then
-  HASHES=$(git log origin/main..HEAD --format=format:%h)
-  UNVERIFIED=""
+  HASHES=$(git log origin/main..HEAD --format='format:%h;%ae')
+  UNSIGNED=""
   for i in $HASHES; do
-    git verify-commit $i &> /dev/null
+    i=($(echo $i | tr ";" " "))
+    HASH=${i[0]}
+    AUTHOR=${i[1]}
+    git verify-commit $HASH &> /dev/null
     if [ $? -eq 1 ]; then
-      UNVERIFIED="$UNVERIFIED $i"
+      UNSIGNED="$UNSIGNED $i"
+    else
+      git verify-commit $HASH 2>&1 | grep $AUTHOR &> /dev/null
+      if [ $? -eq 1 ]; then
+        INCORRECT_AUTHOR="$INCORRECT_AUTHOR $i"
+      fi
     fi
   done
 
-  if [[ $UNVERIFIED != "" ]]; then
-    echo "Failed verifing signature on commits:$UNVERIFIED. All commits must be signed. "
-    exit 1
+  if [[ $UNSIGNED != "" ]]; then
+    echo "Commits missing signature:$UNVERIFIED. All commits must be signed. "
   fi
+  if [[ $INCORRECT_AUTHOR != "" ]]; then
+    echo "Commit author and signature names are different:$INCORRECT_AUTHOR. Commits should be signed by the same author."
+  fi
+  if [[ $INCORRECT_AUTHOR != "" || $UNSIGNED != "" ]]; then
+    exit 1
+  fi 
 else 
   echo "Error. Invalid type $1"
   display_help
