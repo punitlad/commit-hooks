@@ -25,17 +25,21 @@ check() {
   fi
 }
 
-if [ "$1" == "check" ]; then
-  check $2
-elif [ "$1" == "prepend" ]; then
-  if [ "$#" -ne 2 ]; then
-    echo "Error. Expected 2 arguments"
+prepend() {
+  if [ "$#" -ne 1 ]; then
+    echo "Error. Prepend value not set"
     display_help
   fi
 
   MESSAGE=$(awk -v prepend="$2" '{print prepend $0}' .git/COMMIT_EDITMSG)
   echo $MESSAGE > .git/COMMIT_EDITMSG
   echo "Message updated to: $(cat .git/COMMIT_EDITMSG)"
+}
+
+if [ "$1" == "check" ]; then
+  check $2
+elif [ "$1" == "prepend" ]; then
+  prepend $2
 elif [ "$1" == "verify" ]; then
   HASHES=$(git log origin/main..HEAD --format='format:%h;%ae')
   UNSIGNED=""
