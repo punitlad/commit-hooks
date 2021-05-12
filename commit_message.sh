@@ -10,17 +10,6 @@ display_help() {
   exit 1
 }
 
-prepend() {
-  if [ "$#" -ne 1 ]; then
-    echo "Error. Prepend value not set"
-    display_help
-  fi
-
-  MESSAGE=$(awk -v prepend="$1" '{print prepend $0}' .git/COMMIT_EDITMSG)
-  echo $MESSAGE > .git/COMMIT_EDITMSG
-  echo "Message updated to: $(cat .git/COMMIT_EDITMSG)"
-}
-
 verify() {
   HASHES=$(git log origin/main..HEAD --format='format:%h;%ae')
   UNSIGNED=""
@@ -53,7 +42,7 @@ verify() {
 if [ "$1" == "check" ]; then
   ./commands/check.sh $2
 elif [ "$1" == "prepend" ]; then
-  prepend $2
+  ./commands/prepend.sh $2
 elif [ "$1" == "verify" ]; then
   verify  
 else 
