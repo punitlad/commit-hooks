@@ -36,11 +36,7 @@ prepend() {
   echo "Message updated to: $(cat .git/COMMIT_EDITMSG)"
 }
 
-if [ "$1" == "check" ]; then
-  check $2
-elif [ "$1" == "prepend" ]; then
-  prepend $2
-elif [ "$1" == "verify" ]; then
+verify() {
   HASHES=$(git log origin/main..HEAD --format='format:%h;%ae')
   UNSIGNED=""
   for i in $HASHES; do
@@ -59,14 +55,22 @@ elif [ "$1" == "verify" ]; then
   done
 
   if [[ $UNSIGNED != "" ]]; then
-    echo "Commits missing signature:$UNVERIFIED. All commits must be signed. "
+    echo "Commits missing signature:$UNSIGNED. All commits must be signed. "
   fi
   if [[ $INCORRECT_AUTHOR != "" ]]; then
     echo "Commit author and signature names are different:$INCORRECT_AUTHOR. Commits should be signed by the same author."
   fi
   if [[ $INCORRECT_AUTHOR != "" || $UNSIGNED != "" ]]; then
     exit 1
-  fi 
+  fi
+}
+
+if [ "$1" == "check" ]; then
+  check $2
+elif [ "$1" == "prepend" ]; then
+  prepend $2
+elif [ "$1" == "verify" ]; then
+  verify  
 else 
   echo "Error. Invalid type $1"
   display_help
