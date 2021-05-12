@@ -31,7 +31,7 @@ prepend() {
     display_help
   fi
 
-  MESSAGE=$(awk -v prepend="$2" '{print prepend $0}' .git/COMMIT_EDITMSG)
+  MESSAGE=$(awk -v prepend="$1" '{print prepend $0}' .git/COMMIT_EDITMSG)
   echo $MESSAGE > .git/COMMIT_EDITMSG
   echo "Message updated to: $(cat .git/COMMIT_EDITMSG)"
 }
