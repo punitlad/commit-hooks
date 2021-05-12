@@ -1,6 +1,6 @@
 #!/bin/bash
 
-display_help() {
+help() {
   echo "commit_message checker"
   echo
   echo "   check           validates whether the commit message contains the input expected matcher"
@@ -18,5 +18,5 @@ elif [ "$1" == "verify" ]; then
   ./commands/verify.sh
 else 
   echo "Error. Invalid type $1"
-  display_help
+  help
 fi
