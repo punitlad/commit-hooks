@@ -1,11 +1,11 @@
 #!/bin/bash
 
 display_help() {
-  echo "Usage: commit_message {check|prepend} matcher or message"
+  echo "commit_message checker"
   echo
   echo "   check           validates whether the commit message contains the input expected matcher"
   echo "   prepend         prepends commit message with input message"
-  echo "   verify          verifies the latest commit is signed"
+  echo "   verify          verifies signature of commits between origin/main and HEAD"
   echo
   exit 1
 }
