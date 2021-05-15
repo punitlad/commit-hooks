@@ -1,7 +1,7 @@
 #!/bin/bash
 
 help() {
-  echo "usage: commitinator prepend (string_value)"
+  echo "usage: commiterator prepend (string_value)"
   echo 
   echo "Prepends the commit message with the supplied value. Uses the value present in .git/COMMIT_EDITMSG"
   exit 1

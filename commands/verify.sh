@@ -1,7 +1,7 @@
 #!/bin/bash
 
 help() {
-  echo "usage: commitinator verify"
+  echo "usage: commiterator verify"
   echo 
   echo "Verifies commits are signed with the correct author. Checks between origin/main and HEAD"
   exit 1

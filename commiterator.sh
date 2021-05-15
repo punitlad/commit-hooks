@@ -1,7 +1,7 @@
 #!/bin/bash
 
 help() {
-  echo "commitinator"
+  echo "commiterator"
   echo
   echo "   check           validates whether the commit message contains the input expected matcher"
   echo "   prepend         prepends commit message with input message"
@@ -11,12 +11,12 @@ help() {
 }
 
 if [ "$1" == "check" ]; then
-  ./commands/check.sh $2
+  shift; ./commands/check.sh $@
 elif [ "$1" == "prepend" ]; then
-  ./commands/prepend.sh $2
+  shift; ./commands/prepend.sh $@
 elif [ "$1" == "verify" ]; then
-  ./commands/verify.sh
+  shift; ./commands/verify.sh $@
 else 
-  echo "Error. Invalid type $1"
+  echo "Error. Invalid command $1. Available commands are {check, prepend, verify}"
   help
 fi
