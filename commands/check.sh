@@ -1,7 +1,7 @@
 #!/bin/bash
 
 help() {
-  echo "usage: commit_message check (regular_expression)"
+  echo "usage: commitinator check (regular_expression)"
   echo 
   echo "Checks if the commit message contains the supplied regular expression. Looks at current value in .git/COMMIT_EDITMSG"
   exit 1

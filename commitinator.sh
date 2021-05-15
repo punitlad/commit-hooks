@@ -1,7 +1,7 @@
 #!/bin/bash
 
 help() {
-  echo "commit_message checker"
+  echo "commitinator"
   echo
   echo "   check           validates whether the commit message contains the input expected matcher"
   echo "   prepend         prepends commit message with input message"
