@@ -1,17 +1,17 @@
--   id: check-commit-message
-    name: check-commit-message
+-   id: check-message
+    name: check-message
     entry: ./commiterator.sh check
     language: script
     pass_filenames: false
     stages: [commit-msg]
--   id: prepend-commit-message
-    name: prepend-commit-message
+-   id: prepend-message
+    name: prepend-message
     entry: ./commiterator.sh prepend
     language: script
     pass_filenames: false
     stages: [prepare-commit-msg]
--   id: verify-commit-signature
-    name: verify-commit-signature
+-   id: verify-signature
+    name: verify-signature
     entry: ./commiterator.sh verify
     language: script
     always_run: true
