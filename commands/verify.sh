@@ -11,16 +11,17 @@ verify() {
   HASHES=$(git log origin/main..HEAD --format='format:%h;%ae')
   UNSIGNED=""
   for i in $HASHES; do
-    i=($(echo $i | tr ";" " "))
+    # shellcheck disable=SC2207
+    i=($(echo "$i" | tr ";" " "))
     HASH=${i[0]}
     AUTHOR=${i[1]}
-    git verify-commit $HASH &> /dev/null
+    git verify-commit "$HASH" &> /dev/null
     if [ $? -eq 1 ]; then
-      UNSIGNED="$UNSIGNED $i"
+      UNSIGNED="$UNSIGNED $HASH"
     else
-      git verify-commit $HASH 2>&1 | grep $AUTHOR &> /dev/null
+      git verify-commit "$HASH" 2>&1 | grep "$AUTHOR" &> /dev/null
       if [ $? -eq 1 ]; then
-        INCORRECT_AUTHOR="$INCORRECT_AUTHOR $i"
+        INCORRECT_AUTHOR="$INCORRECT_AUTHOR $HASH"
       fi
     fi
   done
@@ -36,4 +37,8 @@ verify() {
   fi
 }
 
+if [ "$#" -gt 0 ]; then
+  help
+  exit 1
+fi
 verify
