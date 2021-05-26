@@ -1,4 +1,4 @@
-# Commit Hooks
+# Commiterator
 
 Git hooks that are able to integrate with [pre-commit](http://pre-commit.com).
 
@@ -10,8 +10,8 @@ Validates whether your commit message contains the specified pattern match (pass
 
 **Example Usage**
 ```yaml
-  - repo: https://github.com/punitlad/commit-hooks
-    rev: v1.3.0
+  - repo: https://github.com/punitlad/commiterator
+    rev: main (or specific tag version)
     hooks:
       - id: check-commit-message
         args: [TASK-[0-9]{4,}]
@@ -24,8 +24,8 @@ Prepends your commit message with specified message (passed via args).
 
 **Example Usage**
 ```yaml
-  - repo: https://github.com/punitlad/commit-hooks
-    rev: v1.3.0
+  - repo: https://github.com/punitlad/commiterator
+    rev: main (or specific tag version)
     hooks:
       - id: prepend-commit-message
         args: ['TASK-12345 - ']
@@ -38,8 +38,8 @@ Verifies signature on all unpushed commits
 
 **Example Usage**
 ```yaml
-  - repo: https://github.com/punitlad/commit-hooks
-    rev: v1.3.0
+  - repo: https://github.com/punitlad/commiterator
+    rev: main (or specific tag version)
     hooks:
       - id: verify-commit-signature
         stage: [push]
