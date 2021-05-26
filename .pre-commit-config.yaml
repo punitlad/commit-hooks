@@ -7,6 +7,7 @@ repos:
       rev: master
       hooks:
         - id: shellcheck
+        - id: shfmt
     - repo: https://github.com/punitlad/commit-hooks.git
       rev: v1.3.0
       hooks:
