@@ -1,6 +1,7 @@
 # Commiterator
 
-Git hooks that are able to integrate with [pre-commit](http://pre-commit.com).
+Script that does various checks against git commits. 
+Main usage is through [pre-commit](http://pre-commit.com), but can be use standalone if needed (via cloning this repo)
 
 ## Available hooks
 
